@@ -41,5 +41,43 @@ namespace LoginSignup.Controllers
 
             return StatusCode(500);
         }
+
+        [HttpGet("getsolutionwithid")]
+        public IActionResult GetSolutionwithID(int id)
+        {
+            try
+            {
+                List<DSAmodel> dsa = _db.DSATables.Where(x => x.Id == id).ToList();
+                return Ok(dsa);
+            }
+            catch {
+                return Ok("Error");
+            }
+
+        }
+
+        [HttpPut("updatedsa")]
+        public IActionResult UpdateDSA(DSAmodel d1)
+        {
+            _db.Update(d1);
+            _db.SaveChanges();
+            return Ok("Successful");
+        }
+
+        [HttpDelete("deletebyid")]
+        public IActionResult DeleteDSA(int id) {
+            try
+            {
+                DSAmodel d1 = _db.DSATables.FirstOrDefault(x => x.Id == id);
+                _db.Remove(d1);
+                _db.SaveChanges();
+                return Ok("Deleted");
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
     }
 }

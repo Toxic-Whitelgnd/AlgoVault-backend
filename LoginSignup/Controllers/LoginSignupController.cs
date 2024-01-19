@@ -32,12 +32,14 @@ namespace LoginSignup.Controllers
             if(u1 != null)
             {
                 Console.WriteLine("Login Successfull:"+u1.Name);
+                return Ok(u1);
             }
             else
             {
                 Console.WriteLine("Invalid user");
+                return Ok("Invalid user");
             }
-            return Ok(u1);
+          
         }
     }
 }
